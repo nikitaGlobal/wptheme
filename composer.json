@@ -21,12 +21,8 @@
         }
     },
     "scripts": {
-        "initTheme": [
-            "php -r \"copy('vendor/nikitaglobal/wptheme/toTheme/styles.css', 'styles.css');\"",
-            "echo 123",
-            "mkdir 123"
-        ],
-        "post-install-cmd": ["@initTheme","mkdir 456","echo 456"],
-        "post-update-cmd": ["@initTheme"]
+        "post-install-cmd": [
+            "bash postinstall.sh"
+        ]
     }
 }
