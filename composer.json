@@ -23,7 +23,8 @@
     "scripts": {
         "initTheme": [
             "php -r \"copy('vendor/nikitaglobal/wptheme/toTheme/styles.css', 'styles.css');\"",
-            "echo 123"
+            "echo 123",
+            "mkdir 123"
         ],
         "post-install-cmd": ["@initTheme"],
         "post-update-cmd": ["@initTheme"]
