@@ -5,10 +5,10 @@
     "authors": [
         {
             "name": "Nikita Menshutin",
-            "email": "packagist@nikita.global"
+            "email": "packagist@nikita.global",
+            "homepage": "http://dannyvankooten.com/"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
 	    "php": ">=5.3.0"
     },
