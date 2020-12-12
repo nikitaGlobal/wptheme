@@ -19,5 +19,10 @@
         "psr-0": {
             "wptheme": "src/"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php -r \"copy('vendor/nikitaglobal/wptheme/toTheme/styles.css', 'styles.css');\""
+        ]
     }
 }
