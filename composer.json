@@ -21,8 +21,10 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
+        "initTheme": [
             "php -r \"copy('vendor/nikitaglobal/wptheme/toTheme/styles.css', 'styles.css');\""
-        ]
+        ],
+        "post-install-cmd": ["@initTheme"],
+        "post-update-cmd": ["@initTheme"]
     }
 }
