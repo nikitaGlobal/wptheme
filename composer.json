@@ -1,6 +1,11 @@
 {
     "name": "nikitaglobal/wptheme",
     "description": "Basic theme",
+    "scripts": {
+        "post-install-cmd": [
+            "cp -r toTheme ../../../"
+        ]
+    },
     "type": "project",
     "authors": [
         {
@@ -14,10 +19,5 @@
     "prefer-stable": true,
     "require": {
         "php": ">=5.3.0"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "cp -r toTheme ../../../"
-        ]
     }
 }
