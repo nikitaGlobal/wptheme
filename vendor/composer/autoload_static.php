@@ -9,12 +9,12 @@ class ComposerStaticInit3b5ae8fd83a69e774378726c2ad8696d
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
-            'Wptheme\\' => 8,
+            'Wptheme\\Theme\\' => 14,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Wptheme\\' => 
+        'Wptheme\\Theme\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

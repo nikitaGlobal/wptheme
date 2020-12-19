@@ -1,5 +1,5 @@
 <?php
-namespace Wptheme\\\;
+namespace Wptheme;
 
 class Theme {
     public function __construct()
