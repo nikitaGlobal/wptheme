@@ -2,6 +2,9 @@
 
 namespace Wptheme;
 
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
+
 class Theme {
 
 
@@ -24,14 +27,19 @@ class Theme {
             return;
         }
         foreach ( $methods as $method ) {
-            if ( strpos( $method, 'init' ) === 0 ) {
+            if ( 0 === strpos( $method, 'init' ) ) {
                 $this->{$method}();
             }
-            if ( strpos( $method, 'filter' ) === 0 ) {
+            if ( 0 === strpos( $method, 'action' ) ) {
+
+                $action = str_replace( 'filter', '', $method );
+                add_action( $action, [ $this, $method ] );
+            }
+            if ( 0 === strpos( $method, 'filter' ) ) {
                 $filter = str_replace( 'filter', '', $method );
                 add_filter( $filter, [ $this, $method ] );
             }
-            if ( strpos( $method, 'sc' ) === 0 ) {
+            if ( 0 === strpos( $method, 'sc' ) ) {
                 $shortcode = str_replace( 'sc', THEMEPREFIX, $method );
                 add_shortcode( $shortcode, [ $this, $method ] );
             }
@@ -83,7 +91,7 @@ class Theme {
     }
 
     public static function version() {
-        if ( defined( 'WP_DEBUG' ) && true == WP_DEBUG ) {
+        if ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) {
             return time();
         }
 
