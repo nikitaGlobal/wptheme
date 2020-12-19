@@ -28,7 +28,7 @@ class Theme {
             }
             if ( 0 === strpos( $method, 'action_' ) ) {
 
-                $action = str_replace( 'filter_', '', $method );
+                $action = str_replace( 'action_', '', $method );
                 add_action( $action, [ $this, $method ] );
             }
             if ( 0 === strpos( $method, 'filter_' ) ) {
