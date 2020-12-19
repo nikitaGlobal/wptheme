@@ -1,2 +1,2 @@
 #!/bin/sh
-cp -r vendor/nikitaglobal/wptheme/toTheme/* vendor/..
+cp -ir vendor/nikitaglobal/wptheme/toTheme/* vendor/..
