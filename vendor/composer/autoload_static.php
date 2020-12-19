@@ -22,6 +22,7 @@ class ComposerStaticInit3b5ae8fd83a69e774378726c2ad8696d
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Wptheme\\Theme' => __DIR__ . '/../..' . '/src/Theme.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
