@@ -70,13 +70,12 @@ class Theme {
                 );
                 wp_enqueue_style( self::sanitize( $scr ) );
         }
-    }
-
-    public static function scriptPath( $file ) {
+        
+        public static function scriptPath( $file ) {
         if ( strpos( $file, 'http' ) !== 0 ) {
             return get_bloginfo( 'template_url' ) . '/' . $file;
         }
-
+        
         return $file;
     }
     public static function sanitize( $value ) {
@@ -84,6 +83,7 @@ class Theme {
     }
 
     public static function version() {
+    }
         if ( defined( 'WP_DEBUG' ) && true == WP_DEBUG ) {
             return time()load_stenqueue
         }
