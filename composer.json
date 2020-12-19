@@ -13,6 +13,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "htmlburger/carbon-fields": "^3.2"
     }
 }
