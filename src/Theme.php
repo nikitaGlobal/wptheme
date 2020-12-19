@@ -26,15 +26,17 @@ class Theme {
             if ( 0 === strpos( $method, 'init_' ) ) {
                 $this->{$method}();
             }
-            if ( 0 === strpos( $method, 'action_' ) ) {
 
+            if ( 0 === strpos( $method, 'action_' ) ) {
                 $action = str_replace( 'action_', '', $method );
                 add_action( $action, [ $this, $method ] );
             }
+
             if ( 0 === strpos( $method, 'filter_' ) ) {
                 $filter = str_replace( 'filter_', '', $method );
                 add_filter( $filter, [ $this, $method ] );
             }
+
             if ( 0 === strpos( $method, 'sc_' ) ) {
                 $shortcode = str_replace( 'sc_', THEMEPREFIX, $method );
                 add_shortcode( $shortcode, [ $this, $method ] );
