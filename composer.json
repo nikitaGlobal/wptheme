@@ -18,5 +18,8 @@
     "require": {
         "php": ">=5.3.0",
         "htmlburger/carbon-fields": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {"wptheme\\": "src/"}
     }
 }
