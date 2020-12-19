@@ -9,12 +9,12 @@ class ComposerStaticInit3b5ae8fd83a69e774378726c2ad8696d
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
-            'Wptheme\\Theme\\' => 14,
+            'Wptheme\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Wptheme\\Theme\\' => 
+        'Wptheme\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -22,6 +22,7 @@ class ComposerStaticInit3b5ae8fd83a69e774378726c2ad8696d
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Wptheme\\Theme' => __DIR__ . '/../..' . '/src/Theme.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
