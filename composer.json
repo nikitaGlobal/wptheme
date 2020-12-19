@@ -20,6 +20,6 @@
         "htmlburger/carbon-fields": "^3.2"
     },
     "autoload": {
-        "psr-4": {"wptheme\\": "src/"}
+        "psr-4": {"Wptheme\\": "src/"}
     }
 }

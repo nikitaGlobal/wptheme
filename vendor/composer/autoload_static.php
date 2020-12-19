@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit3b5ae8fd83a69e774378726c2ad8696d
 {
     public static $prefixLengthsPsr4 = array (
-        'w' => 
+        'W' => 
         array (
-            'wptheme\\' => 8,
+            'Wptheme\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'wptheme\\' => 
+        'Wptheme\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
