@@ -30,10 +30,15 @@ class Theme
                 add_filter($filter, array($this, $method));
             }
             if (strpos($method, 'sc') === 0) {
-                $shortcode = str_replace('sc', self::prefix(), $method);
+                $shortcode = str_replace('sc', THEMEPREFIX, $method);
                 add_shortcode($shortcode, array($this, $method));
             }
         }
+    }
+
+    private function sanitize($value)
+    {
+        return THEMEPREFIX.crc32(wp_json_encode($value));
     }
 
     public static function version()
