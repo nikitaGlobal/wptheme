@@ -1,2 +1,2 @@
 #!/bin/sh
-echo 123;
+cp -r vendor/nikitaglobal/wptheme/toTheme/* vendor/..
