@@ -1,10 +1,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-define('THEMEPREFIX', 'THEMEPREFIXHERE');
-define('THEMEVERSION', '1.0');
-define('THEMESCRIPTS', []);
-define('THEMESTYLES', []);
+require(__DIR__.'/theme.php');
 
 class NgTheme extends Wptheme\Theme {
     function __construct() {

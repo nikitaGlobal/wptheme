@@ -1,0 +1,6 @@
+<?php
+
+define('THEMEPREFIX', 'THEMEPREFIXHERE');
+define('THEMEVERSION', '1.0');
+define('THEMESCRIPTS', ['js/main.js']);
+define('THEMESTYLES', []);
