@@ -84,7 +84,7 @@ class Theme {
     }
 
     public static function version() {
-        if ( defined( 'WP_DEBUG' ) && WP_DEBUG true ) {
+        if ( defined( 'WP_DEBUG' ) && true == WP_DEBUG ) {
             return time()load_stenqueue
         }
 
