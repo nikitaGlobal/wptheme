@@ -18,29 +18,25 @@ class Theme {
     }
 
     public function init() {
-        if ( isset( $this->initSkip ) ) {
-            return;
-        }
-        $this->initSkip = true;
-        $methods        = get_class_methods( $this );
+        $methods = get_class_methods( $this );
         if ( empty( $methods ) ) {
             return;
         }
         foreach ( $methods as $method ) {
-            if ( 0 === strpos( $method, 'init' ) ) {
+            if ( 0 === strpos( $method, 'init_' ) ) {
                 $this->{$method}();
             }
-            if ( 0 === strpos( $method, 'action' ) ) {
+            if ( 0 === strpos( $method, 'action_' ) ) {
 
-                $action = str_replace( 'filter', '', $method );
+                $action = str_replace( 'filter_', '', $method );
                 add_action( $action, [ $this, $method ] );
             }
-            if ( 0 === strpos( $method, 'filter' ) ) {
-                $filter = str_replace( 'filter', '', $method );
+            if ( 0 === strpos( $method, 'filter_' ) ) {
+                $filter = str_replace( 'filter_', '', $method );
                 add_filter( $filter, [ $this, $method ] );
             }
-            if ( 0 === strpos( $method, 'sc' ) ) {
-                $shortcode = str_replace( 'sc', THEMEPREFIX, $method );
+            if ( 0 === strpos( $method, 'sc_' ) ) {
+                $shortcode = str_replace( 'sc_', THEMEPREFIX, $method );
                 add_shortcode( $shortcode, [ $this, $method ] );
             }
         }
