@@ -1,9 +1,9 @@
 <?php
-namespace Wptheme;
+namespace Wptheme\\\;
 
 class Theme {
     public function __construct()
     {
-       echo 123; 
+        echo 123;
     }
 }
