@@ -9,6 +9,9 @@
             "homepage": "https://nikita.global/"
         }
     ],
+    "bin": [
+        "bin/mktheme"
+    ],
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
