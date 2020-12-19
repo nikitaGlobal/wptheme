@@ -1,19 +1,23 @@
 <?php
+
 namespace Wptheme;
 
 class Theme
 {
     public function __construct()
     {
-            add_theme_support("editor-style");
-            add_theme_support("post-thumbnails");
-            $this->init();
+        add_theme_support("editor-style");
+        add_theme_support("post-thumbnails");
+        $this->init();
     }
 
     public function init()
     {
-
-            $methods = get_class_methods($this);
+        if (isset($this->initSkip)) {
+            return;
+        }
+        $this->initSkip = true;
+        $methods = get_class_methods($this);
         if (empty($methods)) {
             return;
         }
@@ -37,7 +41,7 @@ class Theme
         if (defined('WP_DEBUG') && WP_DEBUG == true) {
             return time();
         }
-            
+
         return THEMEVERSION;
     }
 }
