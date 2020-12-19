@@ -79,6 +79,20 @@ class Theme {
                 wp_enqueue_style( self::sanitize( $scr ) );
         }
     }
+
+    public function action_carbon_fields_register_fields() {
+          Container::make( 'theme_options', __( 'Theme Options' ) )
+        ->add_fields(
+            [
+                Field::make( 'text', 'crb_text', 'Text Field' ),
+            ]
+        );
+    }
+
+    public function action_after_setup_theme() {
+         \Carbon_Fields\Carbon_Fields::boot();
+    }
+
     public static function scriptPath( $file ) {
         if ( strpos( $file, 'http' ) !== 0 ) {
             return get_bloginfo( 'template_url' ) . '/' . $file;
@@ -86,6 +100,7 @@ class Theme {
 
         return $file;
     }
+
     public static function sanitize( $value ) {
         return THEMEPREFIX . crc32( wp_json_encode( $value ) );
     }
