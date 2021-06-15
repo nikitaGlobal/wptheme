@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Wptheme\\Menu' => $baseDir . '/src/Menu.php',
     'Wptheme\\Theme' => $baseDir . '/src/Theme.php',
 );
