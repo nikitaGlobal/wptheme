@@ -80,7 +80,7 @@ class Theme {
 	}
 
 	public function init_menu() {
-		if ( ! THEMEMENUS ) {
+		if ( ! defined( 'THEMEMENUS' ) || empty( THEMEMENUS ) ) {
 			return;
 		}
 		foreach ( THEMEMENUS as $menu ) {
