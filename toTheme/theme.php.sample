@@ -1,6 +1,40 @@
-<?php
-
-define('THEMEPREFIX', 'THEMEPREFIXHERE');
-define('THEMEVERSION', '1.0');
-define('THEMESCRIPTS', ['js/main.js']);
-define('THEMESTYLES', []);
+define( 'THEMEPREFIX', 'mycooltheme' );
+define( 'THEMEVERSION', '1.0' );
+define( 'THEMESCRIPTS', array( 'assets/js/app.js', 'assets/js/slider.js' ) );
+define( 'THEMESTYLES', array( 'assets/css/main.css' ) );
+define(
+	'THEMEMENUS',
+	array(
+		array(
+			'id'    => 'topmenu',
+			'label' => __( 'Top menu', 'mycooltheme' ),
+		),
+		array(
+			'id'    => 'socialmenu',
+			'label' => __( 'Social networks', 'mycooltheme' ),
+		),
+	)
+);
+define(
+	'TYPE_FIELDS',
+	array(
+		'plans'           => array(
+			array( 'text', THEMEPREFIX . '_price', __( 'Price', 'mycooltheme' ) ),
+			array( 'select', THEMEPREFIX . '_stars', __( 'Stars', 'mycooltheme' ), array( 1,2,3,4,5 ) ),
+			array( 'select', THEMEPREFIX . '_plan', __( 'Plan', 'mycooltheme' ), 
+				array( 'month' => __('Month', 'mycooltheme'), 'year' => __('Year', 'mycooltheme') ) ),
+		),
+		'reviews'           => array(
+			array( 'richtext', THEMEPREFIX . '_hotel', __( 'About hotel', 'mycooltheme' ) ),
+		),
+	)
+);
+define(
+	'SETTINGS_FIELDS',
+	array(
+		array( 'text', THEMEPREFIX . '_phone', __( 'Phone', 'mycooltheme' ) ),
+		array( 'text', THEMEPREFIX . '_email', __( 'E-mail', 'mycooltheme' ) ),
+		array( 'text', THEMEPREFIX . '_instagram', __( 'Instagram', 'mycooltheme' ) ),
+		array( 'text', THEMEPREFIX . '_linkedin', __( 'Linkedin', 'mycooltheme' ) ),
+    )
+);
