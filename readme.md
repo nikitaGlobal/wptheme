@@ -10,13 +10,14 @@ This package is to make wordpress theme development easier. I have created it fo
 ## theme.php
 **THEMEPREFIX** is a basic constant. Can be almost any unique value of latin letters and numbers. Used for naming shortcodes, hooks, enqueuing styles and scripts.
 **THEMEVERSION** is current version of your theme.
-**THEMESCRIPTS** is an array of your js scripts used in theme. All paths are relative to your theme folder.
+**THEMESCRIPTS** is an array of your js scripts used in theme. All paths are relative to your theme folder or absolute URI.
 **THEMESTYLES** same for your css.
 **THEMEMENUS** is an array of menu arrays, each menu is defined by id and label, see example below.
 **TYPE_FIELDS** is an array which defines custom fields for each post types. "plans" and "reviews" are in the given example below. The syntax is almost like here [https://docs.carbonfields.net/learn/fields/usage.html]
 **SETTINGS_FIELDS** is a similar array which defines basic theme settings. Like the contacts in header or footer.
+**TEMPLATE_FIELDS** is a similar array which defines custom fields for theme templates. Like price for product page.
 
-Exampe:
+Example:
 ```php
 <?php
 define( 'THEMEPREFIX', 'mycooltheme' );
@@ -48,6 +49,14 @@ define(
 		'reviews'           => array(
 			array( 'richtext', THEMEPREFIX . '_hotel', __( 'About hotel', 'mycooltheme' ) ),
 		),
+	)
+);
+define(
+	'TEMPLATE_FIELDS',
+	array(
+		'tpl-product.php' => array(
+			array( 'text', THEMEPREFIX . '_price', __( 'Product price', 'mycooltheme' ) ),
+		)
 	)
 );
 define(
@@ -87,5 +96,16 @@ if ( empty( $items ) ) {
 </nav>
 ```
 
+## Tags
+
+### For single post
+
+NgTheme::tags()
+
+### All tags
+
+NgTheme::get_all_tags()
 
 [![nikita.global](https://nikita.global/wp-content/themes/ngtheme/img/logo.svg)](https://nikita.global)
+
+

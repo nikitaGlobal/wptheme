@@ -103,11 +103,27 @@ class Theme {
 		if ( defined( 'SETTINGS_FIELDS' ) ) {
 			$fields = array();
 			foreach ( SETTINGS_FIELDS as $sets_item ) {
-				$fields[] = $this->carbon_field_make( $sets_item );
+				$sets_item[1] = THEMEPREFIX . $sets_item[1];
+				$fields[]     = $this->carbon_field_make( $sets_item );
 			}
 			Container::make( 'theme_options', __( 'Theme Options' ) )
 			->add_fields( $fields );
 		}
+		if ( defined( 'TEMPLATE_FIELDS' ) ) {
+			foreach ( TEMPLATE_FIELDS as $template_name => $template_arr ) {
+				$fields = array();
+				foreach ( $template_arr as $arr_field ) {
+					$fields[] = $this->carbon_field_make( $arr_field );
+				}
+				Container::make( 'post_meta', __( 'Template fields' ) )
+				->where( 'post_template', '=', $template_name )
+				->add_fields( $fields );
+			}
+		}
+	}
+
+	public static function type_field( $id ) {
+		return carbon_get_theme_option( THEMEPREFIX . $id );
 	}
 
 	private function carbon_field_make( $arr_field ) {
@@ -117,6 +133,14 @@ class Theme {
 		return Field::make( $arr_field[0], $arr_field[1], $arr_field[2] );
 	}
 
+	/**
+	 * Get tags of post. Return array of tags or false if no tags.
+	 * Structure: array( array( 'link' => 'http://...', 'name' => 'tag name' ) ).
+	 *
+	 * @param int $pid Post ID
+	 *
+	 * @return array|bool
+	 */
 	public static function tags( $pid = false ) {
 		$pid  = $pid ? $pid : get_the_id();
 		$out  = array();
@@ -124,6 +148,26 @@ class Theme {
 		if ( ! $tags || array() == $tags ) {
 			return false;
 		}
+		foreach ( $tags as $tag ) {
+			$out[] = array(
+				'link' => get_tag_link( $tag ),
+				'name' => $tag->name,
+			);
+		}
+		return $out;
+	}
+
+	/**
+	 * Get all tags. Return array of tags or false if no tags.
+	 *
+	 * @return array|bool
+	 */
+	public static function get_all_tags() {
+		$tags = get_tags();
+		if ( ! $tags || array() == $tags ) {
+			return false;
+		}
+		$out = array();
 		foreach ( $tags as $tag ) {
 			$out[] = array(
 				'link' => get_tag_link( $tag ),
@@ -152,8 +196,30 @@ class Theme {
 		}
 	}
 
+	private static function shareTwitter( $link ) {
+		return self::shareTW( $link );
+	}
+
+	private static function shareTelegram( $link ) {
+		return self::shareTG( $link );
+	}
+
+	private static function shareFacebook( $link ) {
+		return self::shareFB( $link );
+	}
+
 	private static function shareFB( $link ) {
 		return 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode( $link );
+	}
+
+	private static function shareTW( $link ) {
+		$url = 'https://twitter.com/intent/tweet?url';
+		return add_query_arg(
+			array(
+				'url' => urlencode( $link ),
+			),
+			$url
+		);
 	}
 
 	private static function shareVK( $link ) {
@@ -168,6 +234,7 @@ class Theme {
 		global $wp;
 		return add_query_arg( $_GET, home_url( $wp->request ) );
 	}
+
 	public function action_after_setup_theme() {
 		\Carbon_Fields\Carbon_Fields::boot();
 	}
