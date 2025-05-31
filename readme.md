@@ -4,7 +4,7 @@ This package is to make wordpress theme development easier. I have created it fo
 ## Basic installation
 1. In installed and working wordpress create your theme folder in wp-content/themes. 
 2. Run "composer require nikitaglobal/wptheme" in it.
-3. Run "sh vendor/mycooltheme/wptheme/bin/mktheme" or copy vendor/mycooltheme/wptheme/toTheme files to your theme folder
+3. Run "sh vendor/nikitaglobal/wptheme/bin/mktheme" or copy vendor/mycooltheme/wptheme/toTheme files to your theme folder
 4. Rename theme.php.sample to theme.php and edit it.
 
 ## theme.php
