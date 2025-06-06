@@ -50,7 +50,7 @@ class Theme {
 			return;
 		}
 		foreach ( THEMESCRIPTS as $script ) {
-			$scr = self::scriptPath( $script );
+			$scr = self::script_path( $script );
 			wp_register_script(
 				self::sanitize( $scr ),
 				$scr,
@@ -67,7 +67,26 @@ class Theme {
 			return;
 		}
 		foreach ( THEMESTYLES as $style ) {
-			$scr = self::scriptPath( $style );
+			$prefix = '';
+			$scr    = $prefix . self::script_path( $style );
+
+			if ( 0 === strpos( $style, '@' ) ) {
+				$style = substr( $style, 1 );
+				// if it is remote file, enqueue the remote file contents
+				if ( 0 === strpos( $style, 'http' ) ) {
+					$contents = file_get_contents( $style );
+				} else {
+					$contents = file_get_contents( get_template_directory() . '/' . $style );
+				}
+				wp_register_style(
+					self::sanitize( $scr ),
+					'false',
+				);
+				wp_add_inline_style( self::sanitize( $scr ), $contents );
+				wp_enqueue_style( self::sanitize( $scr ) );
+				continue;
+			}
+
 			wp_register_style(
 				self::sanitize( $scr ),
 				$scr,
@@ -145,7 +164,7 @@ class Theme {
 		$pid  = $pid ? $pid : get_the_id();
 		$out  = array();
 		$tags = get_the_tags();
-		if ( ! $tags || array() == $tags ) {
+		if ( ! $tags || array() === $tags ) {
 			return false;
 		}
 		foreach ( $tags as $tag ) {
@@ -164,7 +183,7 @@ class Theme {
 	 */
 	public static function get_all_tags() {
 		$tags = get_tags();
-		if ( ! $tags || array() == $tags ) {
+		if ( ! $tags || array() === $tags ) {
 			return false;
 		}
 		$out = array();
@@ -183,12 +202,12 @@ class Theme {
 		return $className::{$names[1]}( ...$arguments );
 	}
 
-	public static function Share( $network, $link = false ) {
-		if ( '' == trim( $network ) ) {
+	public static function share( $network, $link = false ) {
+		if ( '' === trim( $network ) ) {
 			return false;
 		}
-		$link   = $link ? $link : self::getCurrentLink();
-		$method = 'Share' . $network;
+		$link   = $link ? $link : self::get_current_link();
+		$method = 'share_' . $network;
 		if ( ! method_exists( __CLASS__, $method ) ) {
 			return false;
 		} else {
@@ -196,23 +215,23 @@ class Theme {
 		}
 	}
 
-	private static function shareTwitter( $link ) {
-		return self::shareTW( $link );
+	private static function share_twitter( $link ) {
+		return self::share_tw( $link );
 	}
 
-	private static function shareTelegram( $link ) {
-		return self::shareTG( $link );
+	private static function share_telegram( $link ) {
+		return self::share_tg( $link );
 	}
 
-	private static function shareFacebook( $link ) {
-		return self::shareFB( $link );
+	private static function share_facebook( $link ) {
+		return self::share_fb( $link );
 	}
 
-	private static function shareFB( $link ) {
+	private static function share_fb( $link ) {
 		return 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode( $link );
 	}
 
-	private static function shareTW( $link ) {
+	private static function share_tw( $link ) {
 		$url = 'https://twitter.com/intent/tweet?url';
 		return add_query_arg(
 			array(
@@ -222,15 +241,15 @@ class Theme {
 		);
 	}
 
-	private static function shareVK( $link ) {
+	private static function share_vk( $link ) {
 		return 'http://vk.com/share.php?url=' . urlencode( $link );
 	}
 
-	private static function shareTG( $link ) {
+	private static function share_tg( $link ) {
 		return 'https://telegram.me/share/url?url=' . urlencode( $link );
 	}
 
-	public static function getCurrentLink() {
+	public static function get_current_link() {
 		global $wp;
 		return add_query_arg( $_GET, home_url( $wp->request ) );
 	}
@@ -239,7 +258,7 @@ class Theme {
 		\Carbon_Fields\Carbon_Fields::boot();
 	}
 
-	public static function scriptPath( $file ) {
+	public static function script_path( $file ) {
 		if ( 0 !== strpos( $file, 'http' ) ) {
 			return get_bloginfo( 'template_url' ) . '/' . preg_replace( '/^\//', '', $file );
 		}
