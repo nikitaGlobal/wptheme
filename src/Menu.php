@@ -33,7 +33,7 @@ class Menu {
 	private static function getMenuByLocation( $location ) {
 		$menu = array_filter(
 			THEMEMENUS,
-			function( $item ) use ( $location ) {
+			function ( $item ) use ( $location ) {
 				if ( $location == $item['id'] ) {
 					return $item;
 				}

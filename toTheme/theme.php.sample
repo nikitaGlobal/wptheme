@@ -33,9 +33,9 @@ define(
 define(
 	'SETTINGS_FIELDS',
 	array(
-		array( 'text', THEMEPREFIX . '_phone', __( 'Phone', 'mycooltheme' ) ),
-		array( 'text', THEMEPREFIX . '_email', __( 'E-mail', 'mycooltheme' ) ),
-		array( 'text', THEMEPREFIX . '_instagram', __( 'Instagram', 'mycooltheme' ) ),
-		array( 'text', THEMEPREFIX . '_linkedin', __( 'Linkedin', 'mycooltheme' ) ),
+		array( 'text', '_phone', __( 'Phone', 'mycooltheme' ) ),
+		array( 'text', '_email', __( 'E-mail', 'mycooltheme' ) ),
+		array( 'text', '_instagram', __( 'Instagram', 'mycooltheme' ) ),
+		array( 'text', '_linkedin', __( 'Linkedin', 'mycooltheme' ) ),
     )
 );

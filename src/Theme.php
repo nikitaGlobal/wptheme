@@ -13,6 +13,9 @@ class Theme {
 		add_theme_support( 'menus' );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 2 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 2 );
+		if ( ! empty( $_GET['action'] ) && 'edit' === $_GET['action'] ) {
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		}
 		add_action( 'carbon_fields_register_fields', array( $this, 'action_carbon_fields_register_fields' ) );
 		add_action( 'after_setup_theme', array( $this, 'action_after_setup_theme' ) );
 		$this->init();

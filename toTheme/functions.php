@@ -1,12 +1,12 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-require(__DIR__.'/theme.php');
+require __DIR__ . '/theme.php';
 
 class NgTheme extends Wptheme\Theme {
-    function __construct() {
-        parent::__construct();
-    }
+	function __construct() {
+		parent::__construct();
+	}
 }
 
 
