@@ -2,15 +2,6 @@
 
 namespace Wptheme;
 
-use function wp_get_nav_menu_items;
-use function wp_get_nav_menu_object;
-use function get_nav_menu_locations;
-use function get_queried_object_id;
-
-if ( ! defined( 'THEMEMENUS' ) ) {
-	define( 'THEMEMENUS', array() );
-}
-
 /**
  * Menu maker class.
  */
@@ -29,18 +20,8 @@ class Menu {
 			return false;
 		}
 		$menuItems = wp_get_nav_menu_items( $menuObject->name, $args );
-		return self::menu_items_process( $menuItems );
-	}
-
-	private static function menu_items_nested( $menuItems, $parentId = 0 ) {
-		$out = array();
-		foreach ( $menuItems as $item ) {
-			if ( $item->menu_item_parent === $parentId ) {
-				$item->children = self::menu_items_nested( $menuItems, $item->ID );
-				$out[]          = $item;
-			}
-		}
-		return ! empty( $out ) ? $out : false;
+		$result    = self::menu_items_nested( self::menu_items_process( $menuItems ) );
+		return $result;
 	}
 
 	/**
@@ -54,7 +35,7 @@ class Menu {
 		$menu = array_filter(
 			THEMEMENUS,
 			function ( $item ) use ( $location ) {
-				if ( $location === $item['id'] ) {
+				if ( $location == $item['id'] ) {
 					return $item;
 				}
 				return false;
@@ -80,11 +61,23 @@ class Menu {
 		}
 		foreach ( $menuItems as $key => $item ) {
 			$out[ $key ]          = $item;
-			$out[ $key ]->current = self::is_current( $item );
-			$out[ $key ]->domain  = self::get_domain( $item );
+			$out[ $key ]->current = self::isCurrent( $item );
+			$out[ $key ]->domain  = self::getDomain( $item );
 		}
-		$out = self::menu_items_nested( $out );
 		return $out;
+	}
+
+	private static function menu_items_nested( $menuItems, $parentId = 0 ) {
+		$menuItemsCopy = $menuItems;
+		foreach ( $menuItems as $key => $item ) {
+			if ( $parentId !== (int) $item->menu_item_parent ) {
+				unset( $menuItems[ $key ] );
+				continue;
+			}
+			$children                    = self::menu_items_nested( $menuItemsCopy, $item->ID );
+			$menuItems[ $key ]->children = $children;
+		}
+		return $menuItems;
 	}
 
 	/**
@@ -94,7 +87,7 @@ class Menu {
 	 *
 	 * @return string|false
 	 */
-	private static function get_domain( $item ) {
+	private static function getDomain( $item ) {
 		if ( 0 !== strpos( $item->url, 'http' ) ) {
 			return false;
 		}
@@ -102,7 +95,7 @@ class Menu {
 		return preg_replace( '/[^\:]*\:\/\/([^\.]*)\.[^$]*$/', '$1', $domain );
 	}
 
-	private static function is_current( $item ) {
-		return get_queried_object_id() === $item->object_id;
+	private static function isCurrent( $item ) {
+		return $item->object_id == get_queried_object_id();
 	}
 }
