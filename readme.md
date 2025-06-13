@@ -76,6 +76,7 @@ Method Wptheme\Menu::items( 'topmenu' ) returns array of WP Objects for menu ite
 Also the object has extra keys:
 - **active** true/false if this item is the current item
 - **domain** stripped domainname. https://somedomain.com/category/postname turns to somedomain. One of the application is obtainig popular service names, like youtube, instagram
+- **children** array of child menu items with the same structure as parent items
 
 Example:
 ```php
@@ -89,7 +90,16 @@ if ( empty( $items ) ) {
 	foreach ( $items as $item ) {
 		$active = $item->current ? 'active' : '';
 		?>
-		<a href="<?php echo esc_url( $item->url ); ?>" class="<?php echo esc_attr( $active ); ?>"><?php echo esc_html( $item->title ); ?></a>
+		<div class="menu-item">
+			<a href="<?php echo esc_url( $item->url ); ?>" class="<?php echo esc_attr( $active ); ?>"><?php echo esc_html( $item->title ); ?></a>
+			<?php if ( ! empty( $item->children ) ) : ?>
+				<div class="submenu">
+					<?php foreach ( $item->children as $child ) : ?>
+						<a href="<?php echo esc_url( $child->url ); ?>" class="<?php echo esc_attr( $child->current ? 'active' : '' ); ?>"><?php echo esc_html( $child->title ); ?></a>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+		</div>
 		<?php
 	}
 	?>
