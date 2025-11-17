@@ -202,13 +202,14 @@ The theme automatically registers hooks and filters based on method naming conve
 
 ## Changelog
 
-### [v2.19] - 2025-11-17
+### [2.19] - 2025-11-17
 #### Changed
 - readme.md updated with comprehensive documentation
 - Added documentation for all utility methods
 - Added documentation for hooks and filters system
 - Fixed menu documentation (active → current)
 - Added social sharing documentation
+- versioning fixed
 
 ### [v2.18] - 2025-11-17
 #### Changed
