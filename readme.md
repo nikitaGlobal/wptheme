@@ -202,6 +202,12 @@ The theme automatically registers hooks and filters based on method naming conve
 
 ## Changelog
 
+### [v2.21] - 2025-11-17
+#### Changed
+- Version updated to 2.21
+- Fixed composer.json version field for proper Packagist versioning
+- Standardized version tags format (v2.21)
+
 ### [2.19] - 2025-11-17
 #### Changed
 - readme.md updated with comprehensive documentation
