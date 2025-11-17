@@ -202,6 +202,11 @@ The theme automatically registers hooks and filters based on method naming conve
 
 ## Changelog
 
+### [v2.22] - 2025-11-17
+#### Fixed
+- Removed duplicate Theme.php and Menu.php files to resolve ambiguous class resolution warnings
+- Only class-theme.php and class-menu.php are used now (WordPress Coding Standards compliant)
+
 ### [v2.21] - 2025-11-17
 #### Fixed
 - Removed duplicate Theme.php and Menu.php files to resolve ambiguous class resolution
